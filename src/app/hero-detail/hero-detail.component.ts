@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { debounceTime } from "rxjs/operators"; 
+import { debounceTime, timeout } from 'rxjs/operators';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -34,10 +34,10 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.heroService.updateHero(this.hero).pipe(
-      debounceTime(10000)
-    ).subscribe(() => {
-      this.goBack();
-    });
+    setTimeout(() => {
+      this.heroService.updateHero(this.hero).subscribe(() => {
+        this.goBack();
+      });
+    }, 3000);
   }
 }

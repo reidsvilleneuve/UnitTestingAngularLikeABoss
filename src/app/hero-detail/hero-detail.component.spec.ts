@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from '../hero.service';
 
-fdescribe('HeroDetailComponent', () => {
+describe('HeroDetailComponent', () => {
   let mockHeroService;
   let TEST_HEROES;
   let fixture;
@@ -19,7 +19,8 @@ fdescribe('HeroDetailComponent', () => {
     ];
 
     mockHeroService = jasmine.createSpyObj([
-      'updateHero'
+      'updateHero',
+      'getHero'
     ]);
 
     TestBed.configureTestingModule({
@@ -36,13 +37,16 @@ fdescribe('HeroDetailComponent', () => {
     fixture = TestBed.createComponent(HeroDetailComponent);
 
     mockHeroService.updateHero.and.returnValue(of(TEST_HEROES[0]));
+    mockHeroService.getHero.and.returnValue(of(TEST_HEROES[0]));
     fixture.detectChanges();
   });
 
-  it('should save', fakeAsync(() => {
+  it('should asdfasdf', fakeAsync(() => {
+    spyOn(fixture.componentInstance.location, 'back');
     fixture.componentInstance.save();
     flush();
 
     expect(mockHeroService.updateHero).toHaveBeenCalled();
+    expect(fixture.componentInstance.location.back).toHaveBeenCalled();
   }));
 });
